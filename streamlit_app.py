@@ -12,5 +12,5 @@ def main():
 
 if __name__ == '__main__':
     # Load the saved model
-    model = tf.keras.models.load_model('convai_v1.weights.h5')
+    model = tf.keras.models.load_model('convai_v1.h5')
     main()
