@@ -2,7 +2,7 @@ import streamlit as st
 import tensorflow as tf
 
 # Streamlit App
-vectorizer = TextVectorization(
+vectorizer = tensorflow.keras.layers.TextVectorization(
         max_tokens=10000,  # Vocabulary size
         output_mode="int",  # Output numerical indices
         output_sequence_length = 10, # Set output sequence length
@@ -14,7 +14,7 @@ def standardize_text(text):
     text = re.sub(r'[^a-zA-Z0-9\s]', '', text)  # Remove special chars
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')  # Unicode to ASCII
     return text
-    
+
 def predict_response(model, vectorizer, input_text, max_length=20):
     # Preprocess input text
     input_text = standardize_text(input_text)
