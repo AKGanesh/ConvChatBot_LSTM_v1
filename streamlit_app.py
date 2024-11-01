@@ -2,7 +2,19 @@ import streamlit as st
 import tensorflow as tf
 
 # Streamlit App
+vectorizer = TextVectorization(
+        max_tokens=10000,  # Vocabulary size
+        output_mode="int",  # Output numerical indices
+        output_sequence_length = 10, # Set output sequence length
+)
 
+def standardize_text(text):
+    """Lowercase and remove special characters from text."""
+    text = text.lower()  # Lowercase
+    text = re.sub(r'[^a-zA-Z0-9\s]', '', text)  # Remove special chars
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')  # Unicode to ASCII
+    return text
+    
 def predict_response(model, vectorizer, input_text, max_length=20):
     # Preprocess input text
     input_text = standardize_text(input_text)
@@ -39,18 +51,7 @@ def predict_response(model, vectorizer, input_text, max_length=20):
 
     return output_text.strip()
 
-    def standardize_text(text):
-        """Lowercase and remove special characters from text."""
-        text = text.lower()  # Lowercase
-        text = re.sub(r'[^a-zA-Z0-9\s]', '', text)  # Remove special chars
-        text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')  # Unicode to ASCII
-    return text
 
-    vectorizer = TextVectorization(
-        max_tokens=10000,  # Vocabulary size
-        output_mode="int",  # Output numerical indices
-        output_sequence_length = 10, # Set output sequence length
-)
 
 def main():
     st.title("Language Model App")
