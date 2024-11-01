@@ -4,11 +4,11 @@ import re
 import unicodedata
 
 # Streamlit App
-vectorizer = tf.keras.layers.TextVectorization(
-        max_tokens=10000,  # Vocabulary size
-        output_mode="int",  # Output numerical indices
-        output_sequence_length = 10, # Set output sequence length
-)
+# vectorizer = tf.keras.layers.TextVectorization(
+#         max_tokens=10000,  # Vocabulary size
+#         output_mode="int",  # Output numerical indices
+#         output_sequence_length = 10, # Set output sequence length
+# )
 
 def standardize_text(text):
     """Lowercase and remove special characters from text."""
@@ -57,6 +57,21 @@ def predict_response(model, vectorizer, input_text, max_length=20):
 
 def main():
     st.title("Language Model App")
+    path_to_file = tf.keras.utils.get_file('shakespeare.txt', 'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt')
+    
+    with open(path_to_file, 'r', encoding='ascii') as file:
+    dataset_content = file.read()
+    dataset_content = standardize_text(dataset_content)
+    # Assuming you have a local dataset
+    dataset_content = ["This is the first text.", "This is the second text.", ...]
+
+    # Create and adapt the vectorizer
+    vectorizer = tf.keras.layers.TextVectorization(
+        max_tokens=10000,
+        output_mode="int",
+        output_sequence_length=10
+    )
+    vectorizer.adapt(dataset_content)
 
     user_input = st.text_input("Enter your prompt:")
     if st.button("Generate"):
