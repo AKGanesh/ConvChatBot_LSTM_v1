@@ -2,7 +2,7 @@ import streamlit as st
 import tensorflow as tf
 
 # Streamlit App
-vectorizer = tensorflow.keras.layers.TextVectorization(
+vectorizer = tf.keras.layers.TextVectorization(
         max_tokens=10000,  # Vocabulary size
         output_mode="int",  # Output numerical indices
         output_sequence_length = 10, # Set output sequence length
