@@ -1,5 +1,7 @@
 import streamlit as st
 import tensorflow as tf
+import re
+import unicodedata
 
 # Streamlit App
 vectorizer = tf.keras.layers.TextVectorization(
