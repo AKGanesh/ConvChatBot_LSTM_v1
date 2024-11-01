@@ -60,8 +60,8 @@ def main():
     path_to_file = tf.keras.utils.get_file('shakespeare.txt', 'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt')
     
     with open(path_to_file, 'r', encoding='ascii') as file:
-    dataset_content = file.read()
-    dataset_content = standardize_text(dataset_content)
+        dataset_content = file.read()
+        dataset_content = standardize_text(dataset_content)
     # Assuming you have a local dataset
     dataset_content = ["This is the first text.", "This is the second text.", ...]
 
